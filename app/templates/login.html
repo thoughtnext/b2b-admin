@@ -1,0 +1,25 @@
+<div>
+  <div class="contain">
+    <div class="card"></div>
+    <div class="card">
+      <h1 class="title">Login</h1>
+      <form>
+        <div class="input-contain">
+          <input type="text" id="Username" required="required" ng-model="email"/>
+          <label for="Username">Username</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-contain">
+          <input type="password" id="Password" required="required" ng-model="password"/>
+          <label for="Password">Password</label>
+          <div class="bar"></div>
+        </div>
+        <div class="footer" style="color: red" ng-show="error">* Invalid Credentials</div>
+        <div class="button-contain">
+          <button ng-click="login()"><span>Go</span></button>
+        </div>
+        <div class="footer"><a href="#">Forgot your password?</a></div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+  <ul class="nav nav-pills">
+    <li style="cursor: pointer;" ng-class="{active : activeMenu === 'not'}"><a data-toggle="pill" ng-click="initialize(0);activeMenu = 'not'">Not Approved</a></li>
+    <li style="cursor: pointer;" ng-class="{active : activeMenu === 'approve'}"><a data-toggle="pill" ng-click="initialize(1);activeMenu = 'approve'">Approved</a></li>
+  </ul>
+  
+  <!-- <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div> -->
+  <div class="row">
+  <div class="col-md-2" style="margin-top: 1rem">
+    <div class="form-group">
+     <select class="form-control" ng-options="i.name for i in industry" ng-model="item" ng-change="updateIndustry(item)"></select>
+    </div>
+  </div>
+  </div>
+  <table ng-table="tableParams" class="table" show-filter="true">
+    <input type="text" class="form-control" placeholder="Search" ng-model="searchUser">
+    <tbody>
+      <tbody ng-repeat="user in $data | filter: searchUser" ng-click="toggleDetail($index)">
+        <tr>
+          <td title="'Name'" sortable="'expert_name'" style="padding-top: 1.5rem;">
+            <div>{{user.expert_name}}</div>
+          </td>
+          <td title="'Industry'" sortable="'industry_name'" style="padding-top: 1.5rem;">
+            <div>{{user.industry_name}}</div>
+          </td>
+          <td title="'From Number'" style="padding-top: 1.5rem;">
+            <div>{{user.from_number}} </div>
+          </td>
+          <td title="'To Number'" style="padding-top: 1.5rem;">
+            <div>{{user.to_number}} </div>
+          </td>
+          <td title="'Recording'" style="padding-top: 1.5rem;">
+            <div>
+              <audio controls controlsList="nodownload">
+                <source ng-src="{{user.uri}}" type="audio/mpeg">
+              </audio>
+            </div>
+          </td>
+          <td title="'Sentiment Positivity'" sortable="'sentiment_positivity'" style="padding-top: 1.5rem;">
+            <div>{{user.sentiment_positivity*100 | number:2}}</div>
+          </td>
+          <td title="'Sentiment Negativity'" sortable="'sentiment_negativity'" style="padding-top: 1.5rem;">
+            <div>{{user.sentiment_negativity*100 | number:2}}</div>
+          </td>
+          <td title="'Sentiment Neutrality'" sortable="'sentiment_neutrality'" style="padding-top: 1.5rem;">
+            <div>{{user.sentiment_neutrality*100 | number:2}}</div>
+          </td>
+          <td title="'Transcription'" style="padding-top: 1.5rem;">
+            <div ng-hide="user.viewField">{{user.transcription}}</div>
+            <div ng-show="user.modifyField">
+              <textarea rows="3" cols="15" ng-model="user.transcription" />
+            </div>
+          </td>
+          <!-- <td title="'Label'" sortable="'label'" style="padding-top: 1.5rem;">
+            <div>{{user.label}}</div>
+          </td> -->
+          <td style="padding-top: 1.5rem;">
+            <button class="btn btn-primary"  ng-hide="user.viewField" ng-click="modify(user)">Edit</button>
+            <button class="btn btn-default" ng-show="user.modifyField" ng-click="update(user)">Save</button>
+          </td>
+          
+          <td ng-hide="status==1"  style="padding-top: 1.5rem;" >
+            <button class="btn btn-primary"  ng-click="approve(user.record_id)">Approve</button>
+          </td>
+       
+          <!-- <td>
+            <button class="btn btn-primary" ng-hide="user.viewField" ng-click="modify(user)">Edit</button>
+            <button class="btn btn-default" ng-show="user.modifyField" ng-click="update(user)">Save</button>
+          </td> -->
+        </tr>
+        <!-- <tr ng-show="activePosition == $index">
+      <td colspan='8'>
+        <div>
+          <div class="row que-card" style="width: 29%;float: left;">
+            <div class="col-md-12">
+              <p><i class="fa fa-info" style="color: #20a8d8">&nbsp;&nbsp;</i><span style="font-weight:600;color: #20a8d8;">Aisle width : {{aisle_width}}</span></p>
+            </div>
+            <div class="col-md-12">
+              <p><i class="fa fa-info" style="color: #20a8d8">&nbsp;&nbsp;</i><span>Working{{working_area}}</span></p>
+            </div>
+          </div>         
+        </div>
+      </td>
+    </tr> -->
+      </tbody>
+    </tbody>
+  </table>
+</div>

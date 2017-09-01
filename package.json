@@ -1,0 +1,24 @@
+{
+  "name": "table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-cookies": "^1.6.5",
+    "angular-sanitize": "^1.6.5",
+    "angular-underscore": "0.0.3",
+    "express": "^4.15.3",
+    "ng-table": "^3.0.1",
+    "ngstorage": "^0.3.11",
+    "save": "^2.3.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

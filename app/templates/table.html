@@ -1,0 +1,157 @@
+<!-- <div ng-controller="myCtrl">
+<h2>AngularJS Table with ng-table Example</h2>
+<table ng-table ="usersTable" class="table table-striped">
+<tr ng-repeat="user in users">
+<td data-title="'Name'">{{user.name}}</td>
+<td data-title="'Age'">{{user.age}}</td>
+<td data-title="'Location'">{{user.location}}</td>
+</tr>
+</table>
+</div> -->
+<div class="container">
+  
+  <div class="container">
+    <button style="margin-bottom: 2rem;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Add new expert
+    </button>
+    <p></p>
+    <!-- Button trigger modal -->
+  </div>
+  <table ng-table="tableParams" class="table" show-filter="true">
+    <input type="text" class="form-control" placeholder="Search" ng-model="searchUser">
+    <tbody>
+      <tbody ng-repeat="user in $data | filter: searchUser" ng-click="toggleDetail($index)">
+        <tr>
+          <td title="'Name'" sortable="'name'" style="padding-top: 1.5rem;">
+            <div ng-hide="user.viewField">{{user.industry_expert_name}}</div>
+            <div ng-show="user.modifyField">
+              <input type="text" ng-model="user.industry_expert_name" /> 
+            </div>
+          </td>
+          <td title="'Phone Number'" sortable="'fule'" style="padding-top: 1.5rem;">
+            <div ng-hide="user.viewField">{{user.phone_number1}} <span ng-if="user.phone_number2">| {{user.phone_number2}} </span><span ng-if="user.phone_number3">| {{user.phone_number3}}</span></div>
+            <!-- <div ng-hide="user.viewField">{{user.phone_number2}}</div>
+            <div ng-hide="user.viewField">{{user.phone_number3}}</div> -->
+            <div ng-show="user.modifyField">
+              <input type="text" ng-model="user.phone_number1" />
+            </div>
+            <div ng-show="user.modifyField">
+              <input type="text" ng-model="user.phone_number2" />
+            </div>
+            <div ng-show="user.modifyField">
+              <input type="text" ng-model="user.phone_number3" />
+            </div>
+          </td>
+          <td title="'Industry'" sortable="'number'" style="padding-top: 1.5rem;">
+            <div ng-hide="user.viewField">{{user.industry.name}}</div>
+            <div ng-show="user.modifyField">
+             <!--  <input type="text" ng-model="user.industry" /> -->
+              <!-- <select ng-model="user.industry.name"> -->
+              <!-- <option ng-repeat="x in industryList">{{x.industry}}</option> -->
+                
+              <!-- </select> -->
+              <select name="mySelect" id="exampleSelect1" ng-options="option.name for option in industryList" ng-model="user.industry"></select>
+              <!-- {{user.industry.name}} -->
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-primary" ng-hide="user.viewField" ng-click="modify(user)">Edit</button>
+            <button class="btn btn-default" ng-show="user.modifyField" ng-click="update(user)">Save</button>
+          </td>
+        </tr>
+        <!-- <tr ng-show="activePosition == $index">
+      <td colspan='8'>
+        <div>
+          <div class="row que-card" style="width: 29%;float: left;">
+            <div class="col-md-12">
+              <p><i class="fa fa-info" style="color: #20a8d8">&nbsp;&nbsp;</i><span style="font-weight:600;color: #20a8d8;">Aisle width : {{aisle_width}}</span></p>
+            </div>
+            <div class="col-md-12">
+              <p><i class="fa fa-info" style="color: #20a8d8">&nbsp;&nbsp;</i><span>Working{{working_area}}</span></p>
+            </div>
+          </div>         
+        </div>
+      </td>
+    </tr> -->
+      </tbody>
+    </tbody>
+  </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <img ng-src="../assets/images/cross.png" class="pull-right grow" aria-hidden="true" data-dismiss="modal" style="width:30px; height: 30px; margin-right: -30px; margin-top: -15px;" alt="">
+      <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+      <div class="modal-body">
+        <div class="row main">
+          <div class="main-login main-center">
+            <form class="" method="post" action="#">
+              <div class="form-group">
+                <label for="name" class="cols-sm-2 control-label" style="color:#000;">Your Name</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" ng-model="newExpert.name" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="cols-sm-2 control-label" style="color:#000;">Phone Number</label>
+                <div class="cols-sm-10">
+                  <!-- <div class="input-group" ng-repeat="name in newExpert.names track by $index">
+                    <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Phone number" ng-model="newExpert.names[$index].name"/>
+
+                    <input type="button" ng-click="addRow($index)" value="Add" ng-show="$last">
+
+                    <input type="button" ng-click="deleteRow($event,name)" value="Delete" ng-show="$index != 0">
+                  </div> -->
+                  <table>
+                    <tr ng-repeat="name in newExpert.numbers track by $index">
+                      <!-- <td>
+                        <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span></td> -->
+                      <td>
+                        <input type="text" class="form-control" style="width: 37rem; margin-top: 1rem;" ng-model="newExpert.numbers[$index].number" placeholder="Enter your Phone Number">
+                      </td>
+                      <td>
+                        <input type="button" class="btn btn-default" style="margin-top: 1rem;margin-left: 0.5rem;" ng-click="addRow($index);" value="Add" ng-show="$last" ng-disabled="newExpert.numbers.length>=3">
+                      </td>
+                      <td>
+                        <input type="button" class="btn btn-default" style="background: red; color: white; margin-top: 1rem;" ng-click="deleteRow($event,name)" value="Delete" ng-show="$index != 0">
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleSelect1" style="color:#000;">Select Industry</label>
+                <select name="mySelect" class="form-control" id="exampleSelect1" ng-options="option.name for option in industryList track by option.id" ng-model="newExpert.selectedIndustry"></select>
+                <!-- {{industryList}} -->
+                <!-- <select ng-model="selectedIndustry" class="form-control" id="exampleSelect1"> -->
+                 <!-- <option ng-repeat="x in industryList">{{x.industry}}</option> -->
+                 <!-- {{x.industry}} -->
+                  <!-- <option value="industry" selected>Industry</option>
+                  <option>Education</option>
+                  <option>Logistic</option> -->
+                <!-- </select> -->
+                <!-- {{names.availableOptions}} -->
+                <!-- {{names.selectedOption}} -->
+              </div>
+              <div class="form-group ">
+                <a target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addExpert(newExpert)">Add</a>
+              </div>
+              <label ng-if="addResult == 1" for="exampleSelect1" style="color:green;">Successfully Added</label>
+              <label ng-if="addResult == 2" for="exampleSelect1" style="color:red;">Error. Please fill correct details</label>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
