@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module('myApp')
     app.factory('AppManager', function($q, $http) {
-      var baseURL = 'https://8d5401db.ngrok.io/'
+      var baseURL = 'https://b2b-old.herokuapp.com/'
        
       return {
         getLoginStatus: function(email, password) {
